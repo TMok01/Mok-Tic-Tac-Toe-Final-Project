@@ -39,6 +39,8 @@ class playScreen: UIViewController {
     var CIRCLE = "O"
     var CROSS = "X"
     var board = [UIButton]()
+    var circlesScore = 0
+    var crossesScore = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +66,101 @@ class playScreen: UIViewController {
     @IBAction func boardClickAction(_ sender: UIButton)
     {
         addToBoard(sender)
+        
+   //     if checkForVictory(CROSS)
+   //             {
+  //                 crossesScore += 1
+   //                 resultAlert(title: "Crosses Win!")
+   //             }
+    //
+    //            if checkForVictory(CIRCLE)
+   //             {
+    //                circlesScore += 1
+    //                resultAlert(title: "Circles Win!")
+    //            }
+        
+    //    if(fullBoard()) {
+     //       resultAlert(title: "Draw")
+      //  }
+    }
+    
+    
+    func checkForVictory(_ s :String) -> Bool
+        {
+            // Horizontal Victory
+          if thisSymbol(topLeft, s) && thisSymbol(topMiddle, s) && thisSymbol(topRight, s)
+          {
+            return true
+          }
+           if thisSymbol(middleLeft, s) && thisSymbol(middle, s) && thisSymbol(middleRight, s)
+           {
+               return true
+           }
+           if thisSymbol(bottomRight, s) && thisSymbol(bottomMiddle, s) && thisSymbol(bottomRight, s)
+           {
+               return true
+           }
+    
+           // Vertical Victory
+           if thisSymbol(topLeft, s) && thisSymbol(middleLeft, s) && thisSymbol(bottomLeft, s)
+           {
+               return true
+           }
+          if thisSymbol(topMiddle, s) && thisSymbol(middle, s) && thisSymbol(bottomMiddle, s)
+          {
+               return true
+           }
+           if thisSymbol(topRight, s) && thisSymbol(middleRight, s) && thisSymbol(bottomRight, s)
+           {
+              return true
+           }
+    
+           // Diagonal Victory
+           if thisSymbol(topLeft, s) && thisSymbol(middle, s) && thisSymbol(bottomRight, s)
+           {
+               return true
+           }
+           if thisSymbol(topRight, s) && thisSymbol(middle, s) && thisSymbol(bottomLeft, s)
+           {
+               return true
+           }
+    
+          return false
+       }
+    
+    
+    func thisSymbol(_ button: UIButton, _ symbol: String) -> Bool
+        {
+            return button.title(for: .normal) == symbol
+        }
+    
+    
+ //   func resultAlert(title: String)
+  //  {
+  //      let message = "\nCircles " + String(circlesScore) + "\n\nCrosses " + String(crossesScore)
+  //      let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+  //      ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
+  //          self.resetBoard()
+   //     }))
+   //     self.present(ac, animated: false)
+   // }
+    
+    
+    func resetBoard()
+    {
+        for button in board {
+            button.setTitle(nil, for: .normal)
+            button.isEnabled = true
+        }
+        if firstTurn == Turn.circle {
+            firstTurn = Turn.cross
+            turnLabel.text = CROSS
+        }
+        else if firstTurn == Turn.cross {
+            firstTurn = Turn.circle
+            turnLabel.text = CIRCLE
+        }
+        currentTurn = firstTurn
     }
     
     func fullBoard() -> Bool
@@ -77,6 +174,7 @@ class playScreen: UIViewController {
         }
         return true
     }
+    
     
     func addToBoard(_ sender: UIButton)
     {
