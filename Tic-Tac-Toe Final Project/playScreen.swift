@@ -39,8 +39,13 @@ class playScreen: UIViewController {
     var CIRCLE = "O"
     var CROSS = "X"
     var board = [UIButton]()
+    
     var circlesScore = 0
     var crossesScore = 0
+    
+    var circleLosses = 0
+    var crossesLosses = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,21 +72,23 @@ class playScreen: UIViewController {
     {
         addToBoard(sender)
         
-   //     if checkForVictory(CROSS)
-   //             {
-  //                 crossesScore += 1
-   //                 resultAlert(title: "Crosses Win!")
-   //             }
-    //
-    //            if checkForVictory(CIRCLE)
-   //             {
-    //                circlesScore += 1
-    //                resultAlert(title: "Circles Win!")
-    //            }
+        if checkForVictory(CROSS)
+                {
+                   crossesScore += 1
+                    circleLosses += 1
+                    resultAlert(title: "Crosses Win!")
+                }
+    
+                if checkForVictory(CIRCLE)
+                {
+                    circlesScore += 1
+                crossesLosses += 1
+                    resultAlert(title: "Circles Win!")
+                }
         
-    //    if(fullBoard()) {
-     //       resultAlert(title: "Draw")
-      //  }
+      //  if(fullBoard()) {
+      //      resultAlert(title: "Draw")
+    //  }
     }
     
     
@@ -135,15 +142,15 @@ class playScreen: UIViewController {
         }
     
     
- //   func resultAlert(title: String)
-  //  {
-  //      let message = "\nCircles " + String(circlesScore) + "\n\nCrosses " + String(crossesScore)
-  //      let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
-  //      ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
-  //          self.resetBoard()
-   //     }))
-   //     self.present(ac, animated: false)
-   // }
+    func resultAlert(title: String)
+    {
+        let message = "\nCircles " + String(circlesScore) + "\n\nCrosses " + String(crossesScore)
+        let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
+            self.resetBoard()
+        }))
+        self.present(ac, animated: false)
+    }
     
     
     func resetBoard()
@@ -195,6 +202,20 @@ class playScreen: UIViewController {
             sender.isEnabled = false
             }
         }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nvc = segue.destination as! statsScreen
+        nvc.circlesScore2 = circlesScore
+        nvc.crossesScore2 = crossesScore
+        nvc.circleLosses2 = circleLosses
+        nvc.crossesLosses2 = crossesLosses
+    }
+    
+    
+    
+    
+    
     }
 
 
