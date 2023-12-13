@@ -72,6 +72,8 @@ class playScreen: UIViewController {
     {
         addToBoard(sender)
         
+        
+        
         if checkForVictory(CROSS)
                 {
                    crossesScore += 1
@@ -86,9 +88,10 @@ class playScreen: UIViewController {
                     resultAlert(title: "Circles Win!")
                 }
         
-      //  if(fullBoard()) {
-      //      resultAlert(title: "Draw")
-    //  }
+        if(fullBoard()) {
+            resultAlert(title: "Draw")
+      }
+        
     }
     
     
@@ -149,7 +152,7 @@ class playScreen: UIViewController {
         ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
             self.resetBoard()
         }))
-        self.present(ac, animated: false)
+        self.present(ac, animated: true)
     }
     
     
@@ -159,11 +162,13 @@ class playScreen: UIViewController {
             button.setTitle(nil, for: .normal)
             button.isEnabled = true
         }
-        if firstTurn == Turn.circle {
+        if firstTurn == Turn.circle
+        {
             firstTurn = Turn.cross
             turnLabel.text = CROSS
         }
-        else if firstTurn == Turn.cross {
+        else if firstTurn == Turn.cross
+        {
             firstTurn = Turn.circle
             turnLabel.text = CIRCLE
         }
