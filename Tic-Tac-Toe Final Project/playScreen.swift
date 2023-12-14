@@ -13,6 +13,13 @@ class playScreen: UIViewController {
         case cross
         case circle
     }
+    
+    class appData{
+        public static var circlesScore = 0
+        public static var crossesScore = 0
+        public static var circleLosses = 0
+        public static var crossesLosses = 0
+    }
 
     
     @IBOutlet weak var turnLabel: UILabel!
@@ -42,7 +49,6 @@ class playScreen: UIViewController {
     
     var circlesScore = 0
     var crossesScore = 0
-    
     var circleLosses = 0
     var crossesLosses = 0
     
@@ -50,8 +56,7 @@ class playScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        func initBoard()
-        {
+       
             board.append(topLeft)
             board.append(topMiddle)
             board.append(topRight)
@@ -61,7 +66,7 @@ class playScreen: UIViewController {
             board.append(bottomLeft)
             board.append(bottomMiddle)
             board.append(bottomRight)
-        }
+        
             
         
 
@@ -88,6 +93,7 @@ class playScreen: UIViewController {
                     resultAlert(title: "Circles Win!")
                 }
         
+        // if the fullBoard func returns true the alert should pop up saying reset
         if(fullBoard()) {
             resultAlert(title: "Draw")
       }
@@ -155,7 +161,7 @@ class playScreen: UIViewController {
         self.present(ac, animated: true)
     }
     
-    
+    // set all the button titles back to nil when called
     func resetBoard()
     {
         for button in board {
@@ -173,18 +179,26 @@ class playScreen: UIViewController {
             turnLabel.text = CIRCLE
         }
         currentTurn = firstTurn
+        
     }
     
+    // checking to see when the board is full
     func fullBoard() -> Bool
     {
+       // print(board.count)
         for button in board
         {
-            if button.title(for: .normal) == nil
+          //  print(button.titleLabel?.text)
+            if button.titleLabel?.text == nil
             {
+                // empty space returns false
                 return false
             }
         }
+        // filled space returns true
         return true
+        
+        
     }
     
     
@@ -209,13 +223,13 @@ class playScreen: UIViewController {
         }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nvc = segue.destination as! statsScreen
-        nvc.circlesScore2 = circlesScore
-        nvc.crossesScore2 = crossesScore
-        nvc.circleLosses2 = circleLosses
-        nvc.crossesLosses2 = crossesLosses
-    }
+  //  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   //     let nvc = segue.destination as! statsScreen
+   //     nvc.circlesScore2 = circlesScore
+   //     nvc.crossesScore2 = crossesScore
+    //    nvc.circleLosses2 = circleLosses
+    //    nvc.crossesLosses2 = crossesLosses
+   // }
     
     
     
