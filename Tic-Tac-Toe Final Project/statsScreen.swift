@@ -32,24 +32,44 @@ class statsScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    @IBAction func refreshButton(_ sender: Any) {
+        
+        circleWinLabel.text = "\(AppData.circlesScore)"
+        circleLossesLabel.text = "\(AppData.circleLosses)"
+       // circleWinLossLabel.text = "\(circleWinLoss)"
+        
+        crossWinLabel.text = "\(AppData.crossesScore)"
+        crossesLossesLabel.text = "\(AppData.crossesLosses)"
+       // crossesWinLossLabel.text = "\(crossWinLoss)"
         
         if AppData.circlesScore != 0 && AppData.circleLosses != 0 {
             circleWinLoss = Double(AppData.circlesScore/AppData.circleLosses)
-           // print(circleWinLoss)
-            crossWinLoss = Double(AppData.crossesScore/AppData.crossesLosses)
-           // print(crossWinLoss)
-            
-            circleWinLabel.text = "\(AppData.circlesScore)"
-            circleLossesLabel.text = "\(AppData.circleLosses)"
             circleWinLossLabel.text = "\(circleWinLoss)"
-            
-            crossWinLabel.text = "\(AppData.crossesScore)"
-            crossesLossesLabel.text = "\(AppData.crossesLosses)"
             crossesWinLossLabel.text = "\(crossWinLoss)"
         }
         
+        if AppData.crossesScore != 0 && AppData.crossesLosses != 0 {
+            crossWinLoss = Double(AppData.crossesScore/AppData.crossesLosses)
+            crossesWinLossLabel.text = "\(crossWinLoss)"
+            circleWinLossLabel.text = "\(circleWinLoss)"
+        }
     }
+    
+  //  @IBAction func refreshButton(_ sender: Any) {
+        
+       // if AppData.circlesScore != 0 && AppData.circleLosses != 0 {
+           // circleWinLoss = Double(AppData.circlesScore/AppData.circleLosses)
+           // print(circleWinLoss)
+           // crossWinLoss = Double(AppData.crossesScore/AppData.crossesLosses)
+           // print(crossWinLoss)
+            
+           // circleWinLabel.text = "\(AppData.circlesScore)"
+           // circleLossesLabel.text = "\(AppData.circleLosses)"
+           // circleWinLossLabel.text = "\(circleWinLoss)"
+            
+            //crossWinLabel.text = "\(AppData.crossesScore)"
+            //crossesLossesLabel.text = "\(AppData.crossesLosses)"
+            //crossesWinLossLabel.text = "\(crossWinLoss)"
+      //  }
+        
+   // }
 }
