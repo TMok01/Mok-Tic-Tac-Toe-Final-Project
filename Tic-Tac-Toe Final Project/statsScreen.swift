@@ -36,19 +36,19 @@ class statsScreen: UIViewController {
     
     @IBAction func refreshButton(_ sender: Any) {
         
-        if appData.circlesScore != 0 && appData.circleLosses != 0 {
-            circleWinLoss = Double(appData.circlesScore/appData.circleLosses)
-            print(circleWinLoss)
-            crossWinLoss = Double(appData.crossesScore/appData.crossesLosses)
-            print(crossWinLoss)
+        if AppData.circlesScore != 0 && AppData.circleLosses != 0 {
+            circleWinLoss = Double(AppData.circlesScore/AppData.circleLosses)
+           // print(circleWinLoss)
+            crossWinLoss = Double(AppData.crossesScore/AppData.crossesLosses)
+           // print(crossWinLoss)
             
-            circleWinLabel.text = "\(appData.circlesScore)"
-            circleLossesLabel.text = "\(appData.circleLosses)"
-            circleWinLossLabel.text = "\(appData.circleWinLoss)"
+            circleWinLabel.text = "\(AppData.circlesScore)"
+            circleLossesLabel.text = "\(AppData.circleLosses)"
+            circleWinLossLabel.text = "\(circleWinLoss)"
             
-            crossWinLabel.text = "\(appData.crossesScore)"
-            crossesLossesLabel.text = "\(appData.crossesLosses)"
-            crossesWinLossLabel.text = "\(appData.crossWinLoss)"
+            crossWinLabel.text = "\(AppData.crossesScore)"
+            crossesLossesLabel.text = "\(AppData.crossesLosses)"
+            crossesWinLossLabel.text = "\(crossWinLoss)"
         }
         
     }

@@ -7,6 +7,13 @@
 
 import UIKit
 
+class AppData{
+    static var circlesScore = 0
+    static var crossesScore = 0
+    static var circleLosses = 0
+    static var crossesLosses = 0
+}
+
 class playScreen: UIViewController {
     
     enum Turn {
@@ -14,13 +21,6 @@ class playScreen: UIViewController {
         case circle
     }
     
-    class appData{
-        public static var circlesScore = 0
-        public static var crossesScore = 0
-        public static var circleLosses = 0
-        public static var crossesLosses = 0
-    }
-
     
     @IBOutlet weak var turnLabel: UILabel!
     
@@ -47,10 +47,7 @@ class playScreen: UIViewController {
     var CROSS = "X"
     var board = [UIButton]()
     
-    var circlesScore = 0
-    var crossesScore = 0
-    var circleLosses = 0
-    var crossesLosses = 0
+  
     
     
     override func viewDidLoad() {
@@ -81,16 +78,20 @@ class playScreen: UIViewController {
         
         if checkForVictory(CROSS)
                 {
-                   crossesScore += 1
-                    circleLosses += 1
+                   
                     resultAlert(title: "Crosses Win!")
+            AppData.crossesScore += 1
+            AppData.circleLosses += 1
+            
                 }
     
                 if checkForVictory(CIRCLE)
                 {
-                    circlesScore += 1
-                crossesLosses += 1
+                
                     resultAlert(title: "Circles Win!")
+                    AppData.circlesScore += 1
+                    AppData.crossesLosses += 1
+                    
                 }
         
         // if the fullBoard func returns true the alert should pop up saying reset
@@ -153,7 +154,7 @@ class playScreen: UIViewController {
     
     func resultAlert(title: String)
     {
-        let message = "\nCircles " + String(circlesScore) + "\n\nCrosses " + String(crossesScore)
+        _ = "\nCircles " + String(AppData.circlesScore) + "\n\nCrosses " + String(AppData.crossesScore)
         let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
             self.resetBoard()
@@ -221,18 +222,6 @@ class playScreen: UIViewController {
             sender.isEnabled = false
             }
         }
-    
-    
-  //  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   //     let nvc = segue.destination as! statsScreen
-   //     nvc.circlesScore2 = circlesScore
-   //     nvc.crossesScore2 = crossesScore
-    //    nvc.circleLosses2 = circleLosses
-    //    nvc.crossesLosses2 = crossesLosses
-   // }
-    
-    
-    
     
     
     }
